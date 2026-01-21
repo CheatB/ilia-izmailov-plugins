@@ -1,4 +1,4 @@
-# Ilia Izmailov's Claude Code Plugins
+# Ilya Izmailov's Claude Code Plugins
 
 A collection of plugins for [Claude Code](https://claude.ai/code).
 
@@ -7,7 +7,7 @@ A collection of plugins for [Claude Code](https://claude.ai/code).
 Add this marketplace to Claude Code:
 
 ```bash
-/plugin marketplace add ilia-izmailov/ilia-izmailov-plugins
+/plugin marketplace add izmailovilya/ilia-izmailov-plugins
 ```
 
 Then install any plugin:
