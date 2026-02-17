@@ -62,6 +62,29 @@ Scans your codebase for suspicious areas (orphan routes, dead UI, stale code), a
 
 ---
 
+### agent-teams
+
+Launch a team of AI agents to implement features with built-in code review gates.
+
+> **Requires:** Enable `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS` in settings.json or environment. [See setup →](./plugins/agent-teams/README.md#prerequisites)
+
+```bash
+/plugin install agent-teams@ilia-izmailov-plugins
+```
+
+**Usage:**
+```
+/team-feature "Add user settings page"
+/team-feature docs/plan.md --coders=2
+/conventions
+```
+
+Spawns a full team — researchers explore your codebase, coders implement with gold standard examples, 3 specialized reviewers (security, logic, quality) check every change, and a Tech Lead validates architecture. Supports SIMPLE/MEDIUM/COMPLEX complexity with automatic team scaling.
+
+[Read more →](./plugins/agent-teams/README.md)
+
+---
+
 ## License
 
 MIT
