@@ -22,6 +22,12 @@
       "source": "./plugins/agent-teams",
       "description": "Launch a team of AI agents to implement features with code review gates",
       "version": "0.1.0"
+    },
+    {
+      "name": "expert-arena",
+      "source": "./plugins/expert-arena",
+      "description": "Expert debate arena — real experts argue organically and converge on optimal solutions",
+      "version": "1.0.0"
     }
   ]
 }

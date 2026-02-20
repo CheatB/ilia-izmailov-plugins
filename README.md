@@ -85,6 +85,28 @@ Spawns a full team — researchers explore your codebase, coders implement with 
 
 ---
 
+### expert-arena
+
+Expert debate arena — real experts argue organically and converge on optimal solutions for any domain.
+
+> **Requires:** Enable `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS` in settings.json or environment. [See setup →](./plugins/agent-teams/README.md#prerequisites)
+
+```bash
+/plugin install expert-arena@ilia-izmailov-plugins
+```
+
+**Usage:**
+```
+/expert-arena "Should we use microservices or monolith?"
+/expert-arena "Best pricing strategy for a developer tool?"
+```
+
+Selects 3-5 real experts with opposing viewpoints, gathers context via researchers, launches organic peer-to-peer debates with live commentary, and synthesizes results into a structured document with verdict and recommendations.
+
+[Read more →](./plugins/expert-arena/README.md)
+
+---
+
 ## License
 
 MIT
