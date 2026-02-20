@@ -1,173 +1,171 @@
 ---
 name: deep-thinking
-description: Deep structured thinking — breakdown, parallel expert analysis, summary with recommendations
+description: Глубокое структурированное мышление — декомпозиция, параллельный экспертный анализ, итоговый документ с рекомендациями
 arguments:
   - name: task
-    description: Task or idea to think through
+    description: Задача или идея для продумывания
     required: true
 ---
 
-# Structured Thinking
+# Структурированное мышление
 
-You help think through a task before implementation. Work in three stages.
+Ты помогаешь продумать задачу перед реализацией. Работа в три этапа.
 
-## Stage 1: Task Breakdown
+## Этап 1: Декомпозиция задачи
 
-First, identify **aspects to think through** — parts of the task that need decisions.
+Сначала определи **аспекты для продумывания** — части задачи, которые требуют решений.
 
-Choose a **main expert** for analyzing the task as a whole.
+Выбери **главного эксперта** для анализа задачи в целом.
 
-**Output format:**
+**Формат вывода:**
 
 ```
-## Understanding the Task
+## Понимание задачи
 
-[How you understood the task — 1-2 sentences]
+[Как ты понял задачу — 1-2 предложения]
 
 ---
 
-### Expert Perspective
+### Экспертная перспектива
 
-> "Analyzing as [Main Expert] because [reason]"
+> "Анализирую как [Главный эксперт] потому что [причина]"
 >
-> **Principles from 3 experts:**
-> 1. [Expert A]: "[principle]"
-> 2. [Expert B]: "[principle]"
-> 3. [Expert C]: "[principle]"
+> **Принципы от 3 экспертов:**
+> 1. [Эксперт A]: "[принцип]"
+> 2. [Эксперт B]: "[принцип]"
+> 3. [Эксперт C]: "[принцип]"
 
 ---
 
-## Aspects to Think Through
+## Аспекты для продумывания
 
-| # | Aspect | Why Important | Expert |
-|---|--------|---------------|--------|
-| 1 | [Name] | [Why needs thinking] | [Who will analyze] |
+| # | Аспект | Почему важен | Эксперт |
+|---|--------|-------------|--------|
+| 1 | [Название] | [Почему нужно продумать] | [Кто будет анализировать] |
 | 2 | ... | ... | ... |
 ...
 ```
 
-Usually 5-10 aspects. No more than 15.
+Обычно 5-10 аспектов. Не более 15.
 
-### Expert Table
+### Таблица экспертов
 
-| Area                   | Expert           | Principles                                                     |
+| Область                | Эксперт           | Принципы                                                       |
 | ---------------------- | ---------------- | -------------------------------------------------------------- |
-| React/State            | Dan Abramov      | single responsibility, lift state only when needed, colocation |
-| TypeScript types       | Matt Pocock      | infer over explicit, branded types, type narrowing             |
-| Testing                | Kent C. Dodds    | test behavior not implementation, avoid test IDs, colocation   |
-| Refactoring            | Martin Fowler    | small steps, preserve behavior, extract till you drop          |
-| API design             | Theo Browne      | type-safe contracts, fail fast, explicit errors                |
-| Database               | Markus Winand    | index-first thinking, avoid N+1, explain analyze               |
-| Distributed systems    | Martin Kleppmann | eventual consistency, idempotency, partition tolerance         |
-| Architecture           | Sam Newman       | bounded context, single responsibility, loose coupling         |
-| Security               | Troy Hunt        | defense in depth, least privilege, validate all inputs         |
-| DevOps/K8s             | Kelsey Hightower | declarative config, immutable infrastructure, GitOps           |
-| UX/Product             | Nir Eyal         | trigger → action → variable reward → investment                |
-| Gamification           | Yu-kai Chou      | core drives, white hat vs black hat motivation                 |
+| Python/Архитектура     | Raymond Hettinger | beautiful is better than ugly, генераторы, dataclasses, протоколы |
+| Python/Типизация       | Guido van Rossum  | gradual typing, Protocol over ABC, explicit is better          |
+| Telegram боты          | Aiogram Patterns  | FSM для диалогов, middleware pipeline, handler composition     |
+| Node.js/TypeScript     | Matt Pocock      | infer over explicit, branded types, type narrowing             |
+| Тестирование           | Harry Percival    | TDD goat, test behavior not implementation, outside-in         |
+| Рефакторинг            | Martin Fowler    | маленькие шаги, сохранение поведения, extract till you drop    |
+| API дизайн             | Theo Browne      | type-safe контракты, fail fast, explicit errors                |
+| База данных            | Markus Winand    | index-first thinking, avoid N+1, explain analyze               |
+| Распределённые системы | Martin Kleppmann | eventual consistency, idempotency, partition tolerance         |
+| Архитектура            | Sam Newman       | bounded context, single responsibility, loose coupling         |
+| Безопасность           | Troy Hunt        | defense in depth, least privilege, validate all inputs         |
+| DevOps/Docker          | Kelsey Hightower | declarative config, immutable infrastructure, GitOps           |
+| UX/Продукт             | Nir Eyal         | trigger → action → variable reward → investment                |
+| Стартапы               | Paul Graham      | do things that don't scale, launch fast, talk to users         |
+| Чистый код             | Robert C. Martin | single responsibility, dependency inversion, SOLID             |
 
-For other areas — find appropriate specialists yourself.
+Для других областей — найди подходящих специалистов самостоятельно.
 
-## Stage 2: Project Study
+## Этап 2: Изучение проекта
 
-After breakdown, tell the user:
+После декомпозиции скажи пользователю:
 
-> "Identified N aspects. Now I'll study the project and launch experts for each. 🐙"
+> "Определил N аспектов. Сейчас изучу проект и запущу экспертов для каждого. 🐙"
 
-Then launch **in parallel** `think-through:expert` agents — one per aspect:
+Затем запусти **параллельно** агентов `think-through:expert` — по одному на аспект:
 
 ```
-Task(think-through:expert): "Aspect: [aspect name]. Task context: [brief context]. Study the project and propose solution options."
+Task(think-through:expert): "Аспект: [название]. Контекст задачи: [краткий контекст]. Изучи проект и предложи варианты решения."
 ```
 
-**IMPORTANT:** Launch all agents in ONE message in parallel.
+**ВАЖНО:** Запусти всех агентов в ОДНОМ сообщении параллельно.
 
-## Stage 3: Summary Document
+## Этап 3: Итоговый документ
 
-When all agents return results, create a **unified document** in the format:
+Когда все агенты вернут результаты, создай **единый документ** в формате:
 
 ```markdown
-# [Task Name]
+# [Название задачи]
 
-> **Status:** Research complete
-> **Date:** [date]
-> **Goal:** [brief goal description]
-
----
-
-## Table of Contents
-
-1. [Overview](#overview)
-2. [Aspect 1](#1-name)
-3. [Aspect 2](#2-name)
-...
-N. [Implementation Plan](#implementation-plan)
+> **Статус:** Исследование завершено
+> **Дата:** [дата]
+> **Цель:** [краткое описание цели]
 
 ---
 
-## Overview
+## Оглавление
 
-### Goals
+1. [Обзор](#обзор)
+2. [Аспект 1](#1-название)
+3. [Аспект 2](#2-название)
+...
+N. [План реализации](#план-реализации)
 
-1. **[Goal 1]** — description
-2. **[Goal 2]** — description
+---
+
+## Обзор
+
+### Цели
+
+1. **[Цель 1]** — описание
+2. **[Цель 2]** — описание
 ...
 
-### Key Decisions
+### Ключевые решения
 
-| Aspect | Decision |
-|--------|----------|
-| [Aspect 1] | [Brief decision] |
-| [Aspect 2] | [Brief decision] |
+| Аспект | Решение |
+|--------|--------|
+| [Аспект 1] | [Краткое решение] |
+| [Аспект 2] | [Краткое решение] |
 ...
 
 ---
 
-## 1. [Aspect Name]
+## 1. [Название аспекта]
 
-> **Experts:** [Expert 1], [Expert 2], [Expert 3]
+> **Эксперты:** [Эксперт 1], [Эксперт 2], [Эксперт 3]
 
-### [Subsection with solution]
+### [Подраздел с решением]
 
-[Detailed description of chosen option]
+[Детальное описание выбранного варианта]
 
-| Aspect | Details |
-|--------|---------|
+| Аспект | Детали |
+|--------|--------|
 | ... | ... |
 
-### [Code/examples if needed]
+### [Код/примеры если нужно]
 
-\`\`\`typescript
-// Example code
+\`\`\`python
+# Пример кода
 \`\`\`
 
 ---
 
-## 2. [Next Aspect]
+## План реализации
+
+### Фаза 1: MVP
+
+- [ ] Задача 1
+- [ ] Задача 2
 ...
+
+### Фаза 2: ...
 
 ---
 
-## Implementation Plan
+## Метрики успеха
 
-### Phase 1: MVP
-
-- [ ] Task 1
-- [ ] Task 2
-...
-
-### Phase 2: ...
-
----
-
-## Success Metrics
-
-| Metric | Baseline | Target |
-|--------|----------|--------|
+| Метрика | Базовое | Целевое |
+|---------|---------|--------|
 | ... | — | ... |
 ```
 
-**Save the document** to `docs/plans/YYYY-MM-DD-[topic]-design.md`
+**Сохрани документ** в `docs/plans/YYYY-MM-DD-[тема]-design.md`
 
-At the end, ask:
+В конце спроси:
 
-> "Summary is ready and saved to `docs/plans/...`. Which aspects would you like to discuss further? Or ready to implement?"
+> "Итоговый документ готов и сохранён в `docs/plans/...`. Какие аспекты хочешь обсудить подробнее? Или готов к реализации?"

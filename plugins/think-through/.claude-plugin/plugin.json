@@ -1,12 +1,12 @@
 {
   "name": "think-through",
-  "version": "1.0.2",
-  "description": "Deep structured thinking with parallel expert analysis before implementation",
+  "version": "2.0.0",
+  "description": "Глубокое структурированное мышление с параллельным экспертным анализом перед реализацией. Адаптировано под Python/Node.js/aiogram стек.",
   "author": {
-    "name": "Ilya Izmailov",
-    "url": "https://github.com/izmailovilya"
+    "name": "Ivan Martsinkevich (fork of Ilya Izmailov)",
+    "url": "https://github.com/CheatB"
   },
-  "repository": "https://github.com/izmailovilya/ilia-izmailov-plugins",
+  "repository": "https://github.com/CheatB/ilia-izmailov-plugins",
   "license": "MIT",
-  "keywords": ["thinking", "planning", "experts", "analysis"]
+  "keywords": ["thinking", "planning", "experts", "analysis", "python", "aiogram"]
 }
