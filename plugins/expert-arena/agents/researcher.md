@@ -38,17 +38,34 @@ model: sonnet
 - Зависимости и ограничения
 - Техдолг и известные проблемы (TODO, FIXME, HACK)
 
+**Специфика Python/aiogram проектов:**
+- `requirements.txt` / `pyproject.toml` — зависимости и версии
+- `docker-compose.yml` — сервисы (PostgreSQL, Redis, Nginx)
+- `alembic/versions/` — миграции БД, история изменений схемы
+- `app/handlers/` — роутеры и хендлеры (aiogram dp/router)
+- `app/services/` — бизнес-логика
+- `app/database/models.py` — модели SQLAlchemy/Tortoise
+- `.env.example` — список переменных окружения
+- `Makefile` / `scripts/` — команды сборки и деплоя
+
+**Специфика Node.js проектов:**
+- `package.json` — зависимости и скрипты
+- `prisma/schema.prisma` — модели БД
+- `src/routes/` или `src/controllers/` — маршрутизация
+- `Dockerfile` / `docker-compose.yml` — контейнеризация
+
 **Для исследования через веб:**
 
 - `WebSearch` — найди актуальные статьи, обсуждения, данные
 - `WebFetch` — если нужно прочитать конкретную статью подробнее
 
 Ищи:
-- Актуальные best practices (2024-2025+)
+- Актуальные best practices (2025-2026+)
 - Мнения экспертов и их дебаты
 - Статистику и данные
 - Кейсы и прецеденты
 - Сравнения подходов
+- Свежие бенчмарки и performance-сравнения
 
 ### 3. Структурируй находки
 
@@ -59,6 +76,13 @@ model: sonnet
 
 ### Что исследовал
 [Краткое описание фокуса]
+
+### Стек проекта (если исследовал код)
+- Язык: [Python X.X / Node.js X.X / ...]
+- Фреймворк: [aiogram / FastAPI / Express / ...]
+- БД: [PostgreSQL / SQLite / MongoDB / ...]
+- Кэш: [Redis / нет]
+- Деплой: [Docker / systemd / PM2 / ...]
 
 ### Ключевые находки
 

@@ -1,12 +1,12 @@
 {
   "name": "expert-arena",
-  "version": "1.0.0",
-  "description": "Expert debate arena — dynamic experts debate and converge on optimal solutions for any domain",
+  "version": "2.0.0",
+  "description": "Арена экспертных дебатов — динамический подбор реальных экспертов, исследование контекста, органические дебаты с прямой коммуникацией до конвергенции. Адаптирован под Python/Node.js/aiogram стек.",
   "author": {
-    "name": "Ilya Izmailov",
-    "url": "https://github.com/izmailovilya"
+    "name": "Ivan Martsinkevich (fork of Ilya Izmailov)",
+    "url": "https://github.com/CheatB"
   },
-  "repository": "https://github.com/izmailovilya/ilia-izmailov-plugins",
+  "repository": "https://github.com/CheatB/ilia-izmailov-plugins",
   "license": "MIT",
-  "keywords": ["experts", "debate", "arena", "consensus", "decision-making", "agent-teams"]
+  "keywords": ["experts", "debate", "arena", "consensus", "decision-making", "agent-teams", "python", "aiogram"]
 }

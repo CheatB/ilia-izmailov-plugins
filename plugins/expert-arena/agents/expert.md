@@ -169,6 +169,20 @@ SendMessage(
 - "В вашем проекте уже используется [паттерн X] в [файле Y], поэтому..."
 - "Я вижу что [зависимость Z] в проекте, что означает..."
 
+**Паттерны для Python/aiogram проектов:**
+- `Glob("**/requirements.txt")`, `Glob("**/pyproject.toml")` — зависимости
+- `Grep("include_router|Router()")` — структура роутеров aiogram/FastAPI
+- `Grep("class.*Model.*Base")` — модели SQLAlchemy/Tortoise
+- `Read("docker-compose.yml")` — инфраструктура
+- `Grep("async def|await ")` — паттерны асинхронности
+- `Grep("@dp\.|@router\.")` — хендлеры aiogram
+
+**Паттерны для Node.js проектов:**
+- `Read("package.json")` — зависимости и скрипты
+- `Grep("app\\.use|router\\.get|router\\.post")` — маршрутизация Express
+- `Grep("import.*from|require\\(")` — зависимости модулей
+- `Grep("prisma\\..*\\.")` — запросы к БД через Prisma
+
 ### Для любых вопросов
 
 Используй WebSearch для свежих данных, статистики, бенчмарков.
