@@ -214,7 +214,7 @@ AskUserQuestion(
 
 ---
 
-## Phase 3: Brief Compilation & Handoff
+## Phase 3: Brief Compilation, Approval & Handoff
 
 ### Step 1: Compile the brief
 
@@ -228,7 +228,9 @@ AskUserQuestion(
 [Who will use this — from Q2 or inferred from Q1]
 
 ## Success Criteria
-[How to know it works — from Q3 or inferred from Q1]
+[Concrete, observable criteria — from Q3 or inferred from Q1.
+Each criterion should be verifiable: "User can do X", "Y is visible on screen", "Z happens when...".
+These criteria are the PRIMARY reference for code reviewers.]
 
 ## Exclusions
 [What NOT to build — from Q4, or "None specified"]
@@ -238,19 +240,30 @@ AskUserQuestion(
 
 ## Project Context
 [Condensed summary from researchers: stack, relevant features, key patterns]
+
+---
+
+## Review Checklist (for code reviewers)
+
+Use this section to verify the implementation meets the user's intent:
+
+- [ ] [Success criterion 1 — restated as a checkable item]
+- [ ] [Success criterion 2]
+- [ ] [...]
+- [ ] Exclusions respected: [list what must NOT be present]
 ```
 
 ### Step 2: Show brief and confirm
 
-Present the brief, then ask:
+Present the compiled brief to the user, then ask:
 
 ```
 AskUserQuestion(
   questions=[{
-    "question": "Here's what I'll send to the build team. All correct?",
+    "question": "Here's the plan I'll send to the build team. All correct?",
     "header": "Launch?",
     "options": [
-      {"label": "Looks good, launch!", "description": "Start building based on this brief"},
+      {"label": "Looks good, launch!", "description": "Save the plan and start building"},
       {"label": "I want to adjust", "description": "Let me change something first"}
     ],
     "multiSelect": false
@@ -260,10 +273,22 @@ AskUserQuestion(
 
 If adjustments needed — update brief, show again.
 
-### Step 3: Hand off to /team-feature
+### Step 3: Save brief to file
+
+When the user approves, save the brief as a file in the project root:
 
 ```
-Skill("team-feature", args="{compiled brief}")
+Write(file_path=".briefs/[feature-name-kebab-case].md", content="{compiled brief}")
+```
+
+The file serves two purposes:
+1. **For `/team-feature`** — the team reads it as the source of truth for what to build
+2. **For reviewers** — the Review Checklist section is the acceptance test for code review
+
+### Step 4: Hand off to /team-feature
+
+```
+Skill("team-feature", args="Feature brief saved to .briefs/[feature-name].md — read it and implement. Use the Review Checklist as acceptance criteria for code review.")
 ```
 
 ---
