@@ -1,6 +1,6 @@
 ---
 name: vibe-audit
-description: Interactive feature audit — finds dead code and experiments, asks if they're needed
+description: Интерактивный аудит проекта — находит мёртвый код и эксперименты, спрашивает нужны ли они
 allowed-tools:
   - Task
   - Read
@@ -8,51 +8,65 @@ allowed-tools:
   - Glob
   - Bash
   - AskUserQuestion
-argument-hint: "[scope: features | server | ui | stores | all]"
+argument-hint: "[scope: handlers | backend | templates | models | all]"
 ---
 
-# Vibe Audit — Interactive Feature Cleanup
+# Vibe Audit — Интерактивная очистка проекта
 
-You are an interactive audit assistant. Your job is to find potentially dead or experimental code and **ask the user** whether it's still needed.
+Ты — интерактивный помощник по аудиту. Твоя задача — найти потенциально мёртвый или экспериментальный код и **спросить пользователя**, нужен ли он ещё.
 
-## Philosophy
+## Философия
 
-In vibe-coding, lots of experimental code gets created. Some becomes core features, some gets abandoned. You help identify what's what through **conversation**, not assumptions.
+При вайбкодинге создаётся много экспериментального кода. Что-то становится ядром продукта, что-то забрасывается. Ты помогаешь определить что есть что через **диалог**, а не через предположения.
+
+## Поддерживаемые стеки
+
+Аудит адаптирован под проекты на:
+- **Python** (aiogram, FastAPI, Flask, Django)
+- **Node.js / TypeScript** (Express, NestJS, Next.js)
+- **Смешанные проекты** (Python бэкенд + JS фронтенд)
+
+Перед началом аудита определи стек проекта по `requirements.txt`, `pyproject.toml`, `package.json` или структуре директорий.
 
 ## Workflow
 
-### Step 1: Discovery
+### Шаг 1: Обнаружение
 
-Run the appropriate agent based on scope (see "Scope Options" below):
-
-```
-# Default or "all"
-Task(vibe-audit:feature-scanner) - "Scan codebase for potentially unused features"
-
-# Specific scopes
-Task(vibe-audit:features-auditor) - "Audit src/features/ for unused exports"
-Task(vibe-audit:server-auditor) - "Audit src/server/ for unused procedures"
-Task(vibe-audit:ui-auditor) - "Audit src/design-system/ for orphan components"
-Task(vibe-audit:stores-auditor) - "Audit src/stores/ for dead Zustand slices"
-```
-
-### Step 2: Interactive Review
-
-For EACH suspicious item found, use AskUserQuestion:
+Запусти соответствующего агента по скоупу (см. «Скоупы» ниже):
 
 ```
-AskUserQuestion with options:
+# По умолчанию или "all"
+Task(vibe-audit:feature-scanner) - "Сканировать кодовую базу на потенциально неиспользуемые фичи"
+
+# Конкретные скоупы
+Task(vibe-audit:features-auditor) - "Аудит обработчиков и модулей на неиспользуемые экспорты"
+Task(vibe-audit:server-auditor) - "Аудит бэкенда на неиспользуемые эндпоинты и сервисы"
+Task(vibe-audit:ui-auditor) - "Аудит шаблонов и фронтенда на осиротевшие компоненты"
+Task(vibe-audit:stores-auditor) - "Аудит моделей и состояния на мёртвые поля и таблицы"
+```
+
+### Шаг 2: Интерактивный обзор
+
+Для КАЖДОГО подозрительного элемента используй AskUserQuestion:
+
+```
+AskUserQuestion с вариантами:
 - "🗑️ Удалить — это мёртвый код"
 - "⚠️ Deprecated — скоро удалим"
 - "✅ Нужно — это активная фича"
 - "🤔 Не уверен — надо разобраться"
 ```
 
-**Important:** Ask ONE feature at a time. Wait for answer before proceeding.
+**Важно:** Спрашивай по ОДНОЙ фиче за раз. Жди ответа перед продолжением.
 
-### Step 3: Generate Report
+Если пользователь ответил «🤔 Не уверен», запусти usage-analyzer для детального анализа:
+```
+Task(vibe-audit:usage-analyzer) - "Детальный анализ использования {feature_name}"
+```
 
-After all questions answered, create action plan:
+### Шаг 3: Генерация отчёта
+
+После всех ответов создай план действий:
 
 ```markdown
 # 🧹 Vibe Audit Report
@@ -60,23 +74,23 @@ After all questions answered, create action plan:
 ## Решения
 
 ### 🗑️ К удалению
-- [feature] — причина: [user's answer]
+- [фича] — причина: [ответ пользователя]
 
 ### ⚠️ Deprecated
-- [feature] — удалить до: [date]
+- [фича] — удалить до: [дата]
 
 ### ✅ Оставить
-- [feature] — задокументировать: [what it does]
+- [фича] — задокументировать: [что делает]
 
 ## Следующие шаги
 1. [ ] Удалить [X] файлов
-2. [ ] Добавить @deprecated к [Y]
+2. [ ] Добавить @deprecated / # DEPRECATED к [Y]
 3. [ ] Обновить документацию для [Z]
 ```
 
-## Question Templates
+## Шаблоны вопросов
 
-When asking about a feature, provide context:
+При вопросе о фиче дай контекст:
 
 ```
 📦 **{feature_name}**
@@ -90,38 +104,39 @@ When asking about a feature, provide context:
 Это нужно?
 ```
 
-## Scope Options
+## Скоупы
 
-| Scope | Agent | Target |
-|-------|-------|--------|
-| **features** | `features-auditor` | `src/features/` — unused exports, dead code |
-| **server** | `server-auditor` | `src/server/` — unused tRPC procedures, services |
-| **ui** | `ui-auditor` | `src/design-system/` — orphan components |
-| **stores** | `stores-auditor` | `src/stores/` — dead Zustand slices |
-| **all** | `feature-scanner` | Full codebase scan |
+| Скоуп | Агент | Цель |
+|-------|-------|------|
+| **handlers** | `features-auditor` | Обработчики (aiogram handlers, FastAPI routes, Express routes) |
+| **backend** | `server-auditor` | Сервисы, утилиты, middleware, фоновые задачи |
+| **templates** | `ui-auditor` | Шаблоны (Jinja2, HTML), статика, фронтенд-компоненты |
+| **models** | `stores-auditor` | Модели БД (SQLAlchemy, Prisma), Redis состояние, кеш |
+| **all** | `feature-scanner` | Полное сканирование кодовой базы |
 
-### Agent Selection
+### Выбор агента
 
-Based on scope argument, run the appropriate agent:
+По аргументу скоупа запускай нужного агента:
 
 ```
-/vibe-audit           → Task(vibe-audit:feature-scanner)
-/vibe-audit features  → Task(vibe-audit:features-auditor)
-/vibe-audit server    → Task(vibe-audit:server-auditor)
-/vibe-audit ui        → Task(vibe-audit:ui-auditor)
-/vibe-audit stores    → Task(vibe-audit:stores-auditor)
-/vibe-audit all       → Run ALL auditors in parallel:
-                        - Task(vibe-audit:feature-scanner)
-                        - Task(vibe-audit:features-auditor)
-                        - Task(vibe-audit:server-auditor)
-                        - Task(vibe-audit:ui-auditor)
-                        - Task(vibe-audit:stores-auditor)
+/vibe-audit            → Task(vibe-audit:feature-scanner)
+/vibe-audit handlers   → Task(vibe-audit:features-auditor)
+/vibe-audit backend    → Task(vibe-audit:server-auditor)
+/vibe-audit templates  → Task(vibe-audit:ui-auditor)
+/vibe-audit models     → Task(vibe-audit:stores-auditor)
+/vibe-audit all        → Запусти ВСЕ аудиторы параллельно:
+                         - Task(vibe-audit:feature-scanner)
+                         - Task(vibe-audit:features-auditor)
+                         - Task(vibe-audit:server-auditor)
+                         - Task(vibe-audit:ui-auditor)
+                         - Task(vibe-audit:stores-auditor)
 ```
 
-## Important Rules
+## Важные правила
 
-1. **Never delete without asking** — always get user confirmation
-2. **One question at a time** — don't overwhelm with batch questions
-3. **Provide context** — show what you found before asking
-4. **Accept "не уверен"** — some things need more investigation
-5. **Track decisions** — remember what user said for the report
+1. **Никогда не удаляй без спроса** — всегда получай подтверждение пользователя
+2. **Один вопрос за раз** — не заваливай пакетными вопросами
+3. **Давай контекст** — покажи что нашёл перед вопросом
+4. **Принимай «не уверен»** — некоторые вещи требуют исследования
+5. **Запоминай решения** — помни ответы пользователя для отчёта
+6. **Определи стек** — перед началом сканирования пойми, какой стек используется
