@@ -1,112 +1,115 @@
-# Ilya Izmailov's Claude Code Plugins
+# Адаптированные плагины Claude Code — CheatB
 
-A collection of plugins for [Claude Code](https://claude.ai/code).
+Форк [izmailovilya/ilia-izmailov-plugins](https://github.com/izmailovilya/ilia-izmailov-plugins), адаптированный под **Python/aiogram/FastAPI/Node.js** стек с полным переводом на русский.
 
-## Installation
+## Установка
 
-Add this marketplace to Claude Code:
-
-```bash
-/plugin marketplace add izmailovilya/ilia-izmailov-plugins
-```
-
-Then install any plugin:
+Добавь маркетплейс в Claude Code:
 
 ```bash
-/plugin install <plugin-name>@ilia-izmailov-plugins
+/plugin marketplace add CheatB/ilia-izmailov-plugins
 ```
 
-**Important:** Restart Claude Code after installing plugins to load them.
+Затем установи любой плагин:
 
-## Available Plugins
+```bash
+/plugin install <название>@ilia-izmailov-plugins
+```
+
+**Важно:** Перезапусти Claude Code после установки плагинов.
+
+## Что адаптировано
+
+- Все инструкции, примеры и промпты на **русском** языке
+- Стек: React/tRPC/Prisma → **Python/aiogram/FastAPI/SQLAlchemy/Node.js**
+- Инструменты: vitest/biome/tsc → **pytest/ruff/mypy**
+- Gold standards: .tsx/.ts → **.py** (handler-template, api-endpoint, service-layer и т.д.)
+
+## Доступные плагины
 
 ### think-through
 
-Deep structured thinking with parallel expert analysis before implementation.
+Глубокое структурированное мышление с параллельным анализом экспертов перед реализацией.
 
 ```bash
 /plugin install think-through@ilia-izmailov-plugins
 ```
 
-**Usage:**
 ```
-/deep-thinking <task or idea>
+/deep-thinking <задача или идея>
 ```
 
-Breaks down your task into aspects, launches expert agents in parallel (🐙), and produces a comprehensive design document with decisions, trade-offs, and implementation plan.
-
-[Read more →](./plugins/think-through/README.md)
+Разбивает задачу на аспекты, запускает экспертов параллельно 🐙, выдаёт документ с решениями, компромиссами и планом.
 
 ---
 
 ### vibe-audit
 
-Interactive feature audit for vibe-coded projects. Finds dead code, unused features, and experiments through conversation.
+Интерактивный аудит фич для vibe-coded проектов. Находит мёртвый код, неиспользуемые фичи и эксперименты.
 
 ```bash
 /plugin install vibe-audit@ilia-izmailov-plugins
 ```
 
-**Usage:**
 ```
-/vibe-audit              # Full codebase scan
-/vibe-audit features     # src/features/ deep audit
-/vibe-audit server       # src/server/ routers & services
-/vibe-audit ui           # src/design-system/ components
-/vibe-audit stores       # src/stores/ Zustand state
+/vibe-audit              # Полный скан кодовой базы
+/vibe-audit handlers     # app/handlers/ глубокий аудит
+/vibe-audit api          # app/api/ роуты и сервисы
+/vibe-audit keyboards    # app/keyboards/ компоненты
 ```
 
-Scans your codebase for suspicious areas (orphan routes, dead UI, stale code), asks if you need them, and safely removes what you don't — with git backup.
-
-[Read more →](./plugins/vibe-audit/README.md)
+Сканирует кодовую базу, спрашивает нужно ли это, безопасно удаляет лишнее с git-бэкапом.
 
 ---
 
 ### agent-teams
 
-Launch a team of AI agents to implement features with built-in code review gates.
+Команда AI-агентов для реализации фич с встроенными code review gates.
 
-> **Requires:** Enable `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS` in settings.json or environment. [See setup →](./plugins/agent-teams/README.md#prerequisites)
+> **Требуется:** `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS` в settings.json или окружении.
 
 ```bash
 /plugin install agent-teams@ilia-izmailov-plugins
 ```
 
-**Usage:**
 ```
-/team-feature "Add user settings page"
+/team-feature "Добавить страницу настроек пользователя"
 /team-feature docs/plan.md --coders=2
-/conventions
 ```
 
-Spawns a full team — researchers explore your codebase, coders implement with gold standard examples, 3 specialized reviewers (security, logic, quality) check every change, and a Tech Lead validates architecture. Supports SIMPLE/MEDIUM/COMPLEX complexity with automatic team scaling.
-
-[Read more →](./plugins/agent-teams/README.md)
+Запускает полную команду: исследователи изучают код, кодеры реализуют по gold standards, 3 ревьюера (security, logic, quality) проверяют каждое изменение, Tech Lead валидирует архитектуру. Автоматическое масштабирование SIMPLE/MEDIUM/COMPLEX.
 
 ---
 
 ### expert-arena
 
-Expert debate arena — real experts argue organically and converge on optimal solutions for any domain.
+Дебаты реальных экспертов — органический спор для поиска оптимальных решений.
 
-> **Requires:** Enable `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS` in settings.json or environment. [See setup →](./plugins/agent-teams/README.md#prerequisites)
+> **Требуется:** `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS` в settings.json или окружении.
 
 ```bash
 /plugin install expert-arena@ilia-izmailov-plugins
 ```
 
-**Usage:**
 ```
-/expert-arena "Should we use microservices or monolith?"
-/expert-arena "Best pricing strategy for a developer tool?"
+/expert-arena "Микросервисы или монолит?"
+/expert-arena "Лучшая стратегия ценообразования для dev-инструмента?"
 ```
 
-Selects 3-5 real experts with opposing viewpoints, gathers context via researchers, launches organic peer-to-peer debates with live commentary, and synthesizes results into a structured document with verdict and recommendations.
-
-[Read more →](./plugins/expert-arena/README.md)
+Выбирает 3-5 экспертов с противоположными взглядами, запускает органические дебаты с комментарием, синтезирует результат с вердиктом и рекомендациями.
 
 ---
 
-## License
+## Отличия от оригинала
+
+| | Оригинал | Этот форк |
+|---|---|---|
+| Язык | English | Русский |
+| Стек | React/tRPC/Prisma | Python/aiogram/FastAPI/SQLAlchemy |
+| Инструменты | vitest/biome/tsc | pytest/ruff/mypy |
+| Gold standards | .tsx/.ts | .py |
+| Примеры | Next.js компоненты | aiogram хендлеры, FastAPI роуты |
+
+## Лицензия
 
 MIT

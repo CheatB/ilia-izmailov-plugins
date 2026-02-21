@@ -1,0 +1,39 @@
+{
+  "name": "cheatb-plugins",
+  "version": "2.0.0",
+  "description": "Адаптированные плагины для Claude Code — русский язык, Python/aiogram/FastAPI/Node.js стек. Форк из izmailovilya/ilia-izmailov-plugins.",
+  "author": {
+    "name": "Ivan Martsinkevich",
+    "url": "https://github.com/CheatB"
+  },
+  "repository": "https://github.com/CheatB/ilia-izmailov-plugins",
+  "license": "MIT",
+  "plugins": [
+    {
+      "name": "think-through",
+      "path": "plugins/think-through",
+      "description": "Глубокое структурированное мышление с параллельным анализом экспертов перед реализацией",
+      "keywords": ["thinking", "planning", "analysis", "experts"]
+    },
+    {
+      "name": "vibe-audit",
+      "path": "plugins/vibe-audit",
+      "description": "Аудит фич для vibe-coded проектов — находит мёртвый код, неиспользуемые фичи и эксперименты",
+      "keywords": ["audit", "cleanup", "dead-code", "vibe-coding"]
+    },
+    {
+      "name": "agent-teams",
+      "path": "plugins/agent-teams",
+      "description": "Команда AI-агентов для реализации фич с code review gates",
+      "keywords": ["agent-teams", "orchestration", "code-review", "parallel"],
+      "experimental": true
+    },
+    {
+      "name": "expert-arena",
+      "path": "plugins/expert-arena",
+      "description": "Дебаты реальных экспертов для поиска оптимальных решений",
+      "keywords": ["debate", "experts", "decision-making"],
+      "experimental": true
+    }
+  ]
+}
