@@ -1,16 +1,22 @@
 {
   "name": "agent-teams",
-  "version": "0.2.0",
-  "description": "Slash commands that launch Agent Teams for research, debugging, and feature implementation with code review gates",
+  "version": "2.0.0",
+  "description": "Slash-команды для запуска Agent Teams — исследование, отладка и реализация фич с code review gates. Адаптировано под Python/aiogram/FastAPI/Node.js стек.",
   "author": {
-    "name": "Ilya"
+    "name": "Ivan Martsinkevich (fork of Ilya Izmailov)",
+    "url": "https://github.com/CheatB"
   },
+  "repository": "https://github.com/CheatB/ilia-izmailov-plugins",
+  "license": "MIT",
   "keywords": [
     "agent-teams",
     "orchestration",
     "parallel",
     "code-review",
     "research",
-    "debugging"
+    "debugging",
+    "python",
+    "aiogram",
+    "fastapi"
   ]
 }
